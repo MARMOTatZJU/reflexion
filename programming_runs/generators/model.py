@@ -59,6 +59,8 @@ def gpt_chat(
     temperature: float = 0.0,
     num_comps=1,
 ) -> Union[List[str], str]:
+    print('send response')
+    print(f'openai.api_key: {openai.api_key}')
     response = openai.ChatCompletion.create(
         model=model,
         messages=[dataclasses.asdict(message) for message in messages],
@@ -69,6 +71,7 @@ def gpt_chat(
         presence_penalty=0.0,
         n=num_comps,
     )
+    print('get response')
     if num_comps == 1:
         return response.choices[0].message.content  # type: ignore
 
